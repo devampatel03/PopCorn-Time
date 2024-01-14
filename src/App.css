@@ -1,0 +1,61 @@
+/* font-family: 'Boska', serif;
+font-family: 'Trench Slab', sans-serif; */
+
+
+body{
+    color: bisque;
+   
+    
+}
+
+.app {
+    padding: 4rem;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+    
+    
+}
+.heading {
+    font-size : 90px;;
+    font-family:'Trench Slab', sans-serif;
+    align-self: center;
+    margin-top: -40px;
+    margin-bottom: 80px;
+    color:
+}
+
+.search_icon{
+    width:40px;
+    height: 40px;
+
+}
+
+.popcorn{
+    
+    width: 80px;
+    height:80px;
+
+}
+
+.container{
+    
+   
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; 
+    flex-flow: row;  
+    scroll-behavior: smooth;
+}
+
+.list_of_movies {
+    width: 1000px;
+    height: 700px;
+    display: flex-box;
+    overflow-x: scroll;
+    overscroll-behavior-inline: contain;
+    
+}

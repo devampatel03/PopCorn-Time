@@ -28,7 +28,7 @@ const App=() =>{
 
     return (
         <div className="app">
-            <h1 className="heading">POPCORN TIME</h1>
+            <pre><h1 className="heading">POPCO<img src="popcorn.png" class="popcorn" />N  TIME</h1></pre>
             <div className="search">
                 <input
                     placeholder="Search a movie"
@@ -42,6 +42,7 @@ const App=() =>{
             </div>
         
         
+        <div className="list_of_movies">
         {list_of_movies?.length > 0 ? (
         <div className="container">
             {list_of_movies.map((each_movie)=>(
@@ -55,6 +56,7 @@ const App=() =>{
                 <h2>No Movies Found</h2>
             </div>
         )}
+        </div>
         </div>
     );
 
