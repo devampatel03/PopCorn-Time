@@ -28,9 +28,9 @@ const App=() =>{
 
     return (
         <div className="app">
-            <pre><h1 className="heading">POPCO<img src="popcorn.png" class="popcorn" />N  TIME</h1></pre>
+            <pre><span className="heading"><span>P</span>O<span>P</span>CO<img src="popcorn.png" class="popcorn" />N  TIME</span></pre>
             <div className="search">
-                <input
+                <input className="search_bar"
                     placeholder="Search a movie"
                     value={searchkeyword}
                     type="text"

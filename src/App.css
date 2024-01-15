@@ -1,4 +1,5 @@
 /* font-family: 'Boska', serif;
+font-family: 'Melodrama', serif;
 font-family: 'Trench Slab', sans-serif; */
 
 
@@ -18,18 +19,78 @@ body{
     
 }
 .heading {
-    font-size : 90px;;
+    font-size : 96px;;
     font-family:'Trench Slab', sans-serif;
     align-self: center;
     margin-top: -40px;
     margin-bottom: 80px;
-    color:
+    color:#BFBFBF;
 }
 
-.search_icon{
-    width:40px;
-    height: 40px;
+.heading span{
+    color: #F23535;
+}
 
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search_bar{
+   
+    width: 71%;
+    margin: 4rem 0 2rem;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem 5rem;
+    border-radius: 4rem;
+    border: none;
+   
+    background: #0d0f12;
+    font-size:20px;
+    padding-inline-start:1.2rem;
+    padding-inline-end: 1.5rem;
+    padding-top: 1rem;
+    color:goldenrod;
+    box-shadow: 0 0.3rem #2b2929;
+
+    /* -webkit-box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
+    box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527; */
+
+}
+
+.search_bar:focus{
+    outline: none;
+    border: none;
+    box-shadow: 0 0.4rem #dfd9d9;
+}
+
+
+.search_icon{
+    width:50px;
+    height: 50px;
+    display: inline-block;
+
+    margin-inline-start: 5px;
+    margin-bottom: -25px;
+    cursor: pointer;
+
+}
+
+.search_icon:hover{
+    /* transform:translateY(-3px); */
+    width:70px;
+    height: 70px;
+   
+    
+}
+
+.search_icon:active{
+    /* transform:translateY(0px); */
+    width: 50px;
+    height: 50px;
 }
 
 .popcorn{
@@ -48,7 +109,8 @@ body{
     align-items: center;
     flex-wrap: wrap; 
     flex-flow: row;  
-    scroll-behavior: smooth;
+  
+    padding-top: 70px;
 }
 
 .list_of_movies {
@@ -57,5 +119,5 @@ body{
     display: flex-box;
     overflow-x: scroll;
     overscroll-behavior-inline: contain;
-    
+    scrollbar-color: #F23535 #1f2123;
 }
