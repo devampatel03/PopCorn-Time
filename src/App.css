@@ -105,19 +105,41 @@ body{
    
 
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     flex-wrap: wrap; 
     flex-flow: row;  
-  
+
     padding-top: 70px;
 }
 
 .list_of_movies {
+    margin-left: 10px;
+    padding-right: 200px;
     width: 1000px;
-    height: 700px;
+    height: 820px;
     display: flex-box;
+    overflow-y: auto;
     overflow-x: scroll;
     overscroll-behavior-inline: contain;
-    scrollbar-color: #F23535 #1f2123;
+    scrollbar-width: thin;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.list_of_movies::-webkit-scrollbar {
+    display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.list_of_movies {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+
+.card{
+    padding: 50px;
+}
+
+.card img{
+    border-radius: 30px;
 }

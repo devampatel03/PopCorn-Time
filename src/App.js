@@ -16,13 +16,22 @@ const App=() =>{
         const response = await fetch (`${API_URL}&s=${title}`);
         const data =await response.json();
         setlist_of_movies(data.Search);
+        console.log(list_of_movies);
 
 
+    }
+
+    const handleKeyDown=(event)=>{
+        if(event.key==="Enter"){
+            searchmovies(searchkeyword);
+        }
     }
     useEffect(()=>{
         searchmovies('batman');
 
     },[])
+
+    const sortedMovies = list_of_movies.sort((a, b) => a.Year.localeCompare(b.Year));
 
    
 
@@ -34,7 +43,9 @@ const App=() =>{
                     placeholder="Search a movie"
                     value={searchkeyword}
                     type="text"
-                    onChange={(e) => setsearchkeyword(e.target.value)} />
+                    onChange={(e) => setsearchkeyword(e.target.value)} 
+                    onKeyDown={handleKeyDown.bind(this)}
+                    />
                 <img className="search_icon"
                     src="search.svg"
                     onClick={() => searchmovies(searchkeyword)} 
@@ -43,21 +54,22 @@ const App=() =>{
         
         
         <div className="list_of_movies">
-        {list_of_movies?.length > 0 ? (
+        {sortedMovies?.length > 0 ? (
         <div className="container">
-            {list_of_movies.map((each_movie)=>(
+            {sortedMovies.map((each_movie)=>(
                 <Movie_card movie={each_movie}/>
             ))}
-
-
         </div>
         ) :(
             <div className="notfound">
                 <h2>No Movies Found</h2>
             </div>
         )}
+        
         </div>
         </div>
+
+        
     );
 
     
