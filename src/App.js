@@ -31,8 +31,13 @@ const App=() =>{
 
     },[])
 
-    const sortedMovies = list_of_movies.sort((a, b) => a.Year.localeCompare(b.Year));
+    const sortedMovies=list_of_movies;
 
+    if (list_of_movies?.length >0){
+        const sortedMovies = list_of_movies.sort((a, b) => a.Year.localeCompare(b.Year));
+
+
+    }
    
 
     return (
@@ -52,8 +57,9 @@ const App=() =>{
                     />
             </div>
         
-        
+            <button className="left_cursor">Left</button>
         <div className="list_of_movies">
+           
         {sortedMovies?.length > 0 ? (
         <div className="container">
             {sortedMovies.map((each_movie)=>(
