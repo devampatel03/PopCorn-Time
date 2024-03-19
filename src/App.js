@@ -16,22 +16,10 @@ const App=() =>{
     const [ list_of_movies,setlist_of_movies]=useState([]);
 
     const searchmovies = async (title)=>{
-        setlist_of_movies([]);
-        try {
-            const response = await fetch(SEARCH_URL + title, { timeout: 10000 }); // 10-second timeout
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
-            const data = await response.json();
-            setlist_of_movies(data.results);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-        // const response = await fetch (SEARCH_URL + title);
-        // const data =await response.json();
-        // console.log(data);
-        // setlist_of_movies(data.results);
-        // console.log(list_of_movies);
+        const response = await fetch (SEARCH_URL + title);
+        const data =await response.json();
+        setlist_of_movies(data.results);
+        console.log(list_of_movies);
 
 
     }
@@ -57,7 +45,7 @@ const App=() =>{
 
     return (
         <div className="app">
-            <pre><span className="heading"><span>P</span>O<span>P</span>CO<img src="popcorn.png" class="popcorn" />N  TIME</span></pre>
+            <pre><span className="heading"><span>P</span>O<span>P</span>CO<img src="popcorn.png" className="popcorn" />N  TIME</span></pre>
             <div className="search">
                 <input className="search_bar"
                     placeholder="Search a movie"
