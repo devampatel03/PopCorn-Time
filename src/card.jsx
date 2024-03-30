@@ -221,7 +221,7 @@
 
 import React, { useState, useEffect } from "react";
 
-const Movie_card = ({ movie: { imdbID, Year, Poster, Title, Type, Rated, Released, Genre, Director, Actors, Plot, Language, Awards } }) => {
+const Movie_card = ({ movie: { imdbID } }) => {
     const [movieData, setMovieData] = useState(null);
 
     useEffect(() => {

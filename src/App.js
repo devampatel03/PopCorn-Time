@@ -1,89 +1,107 @@
-import React from "react";
-import { useState,useEffect } from "react";
-import Movie_card from "./card";
-import "./App.css";
+import React, { useState, useEffect } from "react";
+import MovieCard from "./card";
 
-
-//api key :bc848061
+import { Button } from "./components/ui/button";
+import Autoplay from "embla-carousel-autoplay"
+import { Card, CardContent } from "./components/ui/card"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./components/ui/carousel"
+import "./index.css";
 const API_URL = 'http://www.omdbapi.com?apikey=bc848061';
 
-const App=() =>{
+// Define CarouselPlugin outside of the App component
+export function CarouselPlugin() {
+    const plugin = React.useRef(
+        Autoplay({ delay: 2000, stopOnInteraction: true })
+    )
 
-    const [searchkeyword,setsearchkeyword]=useState('');
-    const [ list_of_movies,setlist_of_movies]=useState([]);
+    return (
+        <Carousel
+            plugins={[plugin.current]}
+            className="w-full max-w-xs"
+            onMouseEnter={plugin.current.stop}
+            onMouseLeave={plugin.current.reset}
+        >
+            <CarouselContent>
+                {Array.from({ length: 5 }).map((_, index) => (
+                    <CarouselItem key={index}>
+                        <div className="p-1">
+                            <Card>
+                                <CardContent className="flex aspect-square items-center justify-center p-6">
+                                    <span className="text-4xl font-semibold">{index + 1}</span>
+                                </CardContent>
+                            </Card>
+                        </div>
+                    </CarouselItem>
+                ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+        </Carousel>
+    )
+}
 
-    const searchmovies = async (title)=>{
-        const response = await fetch (`${API_URL}&s=${title}`);
-        const data =await response.json();
+const App = () => {
+    const [searchKeyword, setSearchKeyword] = useState('');
+    const [listOfMovies, setListOfMovies] = useState([]);
+
+    const searchMovies = async (title) => {
+        const response = await fetch(`${API_URL}&s=${title}`);
+        const data = await response.json();
         console.log(data);
-        const dataset = await fetch (`https://www.omdbapi.com/?i=${data.imdbID}&apikey=bc848061`);
-        console.log(dataset);
-        setlist_of_movies(data.Search);
-        console.log(list_of_movies);
-
-
+        setListOfMovies(data.Search);
     }
 
-    const handleKeyDown=(event)=>{
-        if(event.key==="Enter"){
-            searchmovies(searchkeyword);
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            searchMovies(searchKeyword);
         }
     }
-    useEffect(()=>{
-        searchmovies('batman');
 
-    },[])
+    useEffect(() => {
+        searchMovies('batman');
+    }, []);
 
-    const sortedMovies=list_of_movies;
-
-    if (list_of_movies?.length >0){
-        const sortedMovies = list_of_movies.sort((a, b) => a.Year.localeCompare(b.Year));
-
-
-    }
-   
+    const sortedMovies = listOfMovies?.length > 0 ? listOfMovies.sort((a, b) => a.Year.localeCompare(b.Year)) : [];
 
     return (
         <div className="app">
-            <pre><span className="heading"><span>P</span>O<span>P</span>CO<img src="popcorn.png" class="popcorn" />N  TIME</span></pre>
+            <pre><span className="heading"><span>P</span>O<span>P</span>CO<img src="popcorn.png" className="popcorn" />N  TIME</span></pre>
             <div className="search">
-                <input className="search_bar"
+                <input
+                    className="search_bar"
                     placeholder="Search a movie"
-                    value={searchkeyword}
+                    value={searchKeyword}
                     type="text"
-                    onChange={(e) => setsearchkeyword(e.target.value)} 
-                    onKeyDown={handleKeyDown.bind(this)}
-                    />
-                <img className="search_icon"
+                    onChange={(e) => setSearchKeyword(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                />
+                <img
+                    className="search_icon"
                     src="search.svg"
-                    onClick={() => searchmovies(searchkeyword)} 
-                    />
+                    alt="Search"
+                    onClick={() => searchMovies(searchKeyword)}
+                />
+                <Button variant="secondary" size="sm" onClick={() => searchMovies(searchKeyword)}>Search</Button>
+
+                {/* Render CarouselPlugin component */}
+                <CarouselPlugin />
             </div>
-        
             <button className="left_cursor">Left</button>
-        <div className="list_of_movies">
-           
-        {sortedMovies?.length > 0 ? (
-
-            <div className="container">
-            {sortedMovies.map((each_movie)=>(
-                <Movie_card movie={each_movie}/>
-                ))}
-        </div>
-        ) :(
-            <div className="notfound">
-                <h2>No Movies Found</h2>
+            <div className="list_of_movies">
+                {sortedMovies?.length > 0 ? (
+                    <div className="container">
+                        {sortedMovies.map((eachMovie) => (
+                            <MovieCard key={eachMovie.imdbID} movie={eachMovie} />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="notfound">
+                        <h2>No Movies Found</h2>
+                    </div>
+                )}
             </div>
-        )}
-        
         </div>
-        </div>
-        
-
-        
     );
-
-    
 };
 
 export default App;
