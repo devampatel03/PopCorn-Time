@@ -64,6 +64,12 @@
     --input: 215 27.9% 16.9%;
     --ring: 216 12.2% 83.9%;
   }
+
+  
+   .overscroll-none {
+    overscroll-behavior: none;
+}
+
 }
 
 @layer base {

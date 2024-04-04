@@ -1,0 +1,7 @@
+.card {
+    width: 300px; /* Adjust the width as needed */
+    height: 450px; /* Adjust the height as needed */
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px; /* Add border radius for rounded corners */
+}

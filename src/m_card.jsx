@@ -244,16 +244,17 @@ const Movie_card = ({ movie: { imdbID } }) => {
     }
 
     return (
+        
         <div className="card" key={imdbID}>
-            <div className="year">
+            {/* <div className="year">
                 <p>{movieData.Year}</p>
-            </div>
+            </div> */}
 
             <div className="poster">
                 <img src={movieData.Poster !== "N/A" ? movieData.Poster : "https://via.placeholder.com/400"} alt={movieData.Title} />
             </div>
 
-            <div className="title">
+            {/* <div className="title">
                 <h3>{movieData.Title}</h3>
             </div>
 
@@ -287,7 +288,7 @@ const Movie_card = ({ movie: { imdbID } }) => {
 
             <div className="year">
                 <p>{movieData.Awards}</p>
-            </div>
+            </div> */}
         </div>
     );
 };
