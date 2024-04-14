@@ -10,9 +10,11 @@ import "./index.css"; // Assuming this file contains global styles
 
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
-import { NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationMenuViewport } from "./components/ui/navigation-menu"
+
+import { NavigationMenu, NavigationMenuContent, NavigationMenuIndicator,ListItem, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationMenuViewport ,navigationMenuTriggerStyle } from "./components/ui/navigation-menu"
 import LoginPage from "./LoginPage";
 import Upcoming_card from "./components/ui/upcoming_movies";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const API_URL = 'http://www.omdbapi.com?apikey=bc848061';
 
@@ -21,7 +23,7 @@ export function CarouselPlugin() {
         Autoplay({ delay: 2000, stopOnInteraction: true })
     );
 
-    const upcomingMovies = ["tt0096895", "tt0372784","tt1877830"];
+    const upcomingMovies = [1,2,3,4,5,6,7];
 
     return (
         <Carousel
@@ -95,6 +97,77 @@ const App = () => {
         };
     }, []);
 
+    const components = [
+        {
+          title: "Alert Dialog",
+          href: "/docs/primitives/alert-dialog",
+          description: "Action and adventure"
+        },
+        {
+            title: "Alert Dialog",
+            href: "/docs/primitives/alert-dialog",
+            description: "Anime"
+          },
+          {
+            title: "Alert Dialog",
+            href: "/docs/primitives/alert-dialog",
+            description: "Comedy"
+          },
+        {
+          title: "Hover Card",
+          href: "/docs/primitives/hover-card",
+          description: "Documentary"
+        },
+        {
+          title: "Progress",
+          href: "/docs/primitives/progress",
+          description: "Fantasy"
+        },
+        {
+          title: "Scroll-area",
+          href: "/docs/primitives/scroll-area",
+          description: "Horror"
+        },
+        {
+          title: "Tabs",
+          href: "/docs/primitives/tabs",
+          description: "Kids"
+        },
+        {
+          title: "Tooltip",
+          href: "/docs/primitives/tooltip",
+          description: "Mystery and thrillers"
+        },
+        {
+            title: "Alert Dialog",
+            href: "/docs/primitives/alert-dialog",
+            description: "Romance"
+          },
+          {
+            title: "Alert Dialog",
+            href: "/docs/primitives/alert-dialog",
+            description: "Science fiction"
+          },
+      ];
+
+      const ComponentList = () => {
+        return (
+          <div className="">
+
+            <ul className="grid w-[10px] gap- p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-black ">
+              {components.map((component, index) => (
+                <li key={index}  className="grid grid-cols-2 p-10 w-full inline-flex h-9 w-max items-center justify-center rounded-md bg-background bg-transparent px-4 py-2 text-xl font-medium transition-colors mb-4 ">
+                  <a href={component.href} className="border-spacing-2 text-customColor   rounded-md hover:bg-slate-800 p-3 ">{component.description}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      };
+      
+    
+      
+
     // Conditionally render the header based on the current route
     const renderHeader = () => {
         if (location.pathname === '/login') {
@@ -103,12 +176,34 @@ const App = () => {
             return (
                 <header className={`fixed top-0 left-0 w-full bg-black text-white p-4 flex justify-between items-center z-50 transition-all duration-300 ${isScrolled ? 'bg-opacity-100 shadow-lg' : ''}`}>
                     <NavigationMenu>
-                        <NavigationMenuList>
-                            <NavigationMenuItem>
-                                <NavigationMenuTrigger>Home</NavigationMenuTrigger>
-                                <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
-                                <NavigationMenuTrigger>Movies</NavigationMenuTrigger>
-                                <NavigationMenuTrigger>Tv Shows</NavigationMenuTrigger>
+                        <NavigationMenuList className="justify-items-stretch flex-column">
+                              <NavigationMenuItem className="flex items-center justify-between">
+                                {/* <NavigationMenuTrigger>Home</NavigationMenuTrigger> */}
+                                <NavigationMenuItem>
+                                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Home
+            </NavigationMenuLink>
+
+        </NavigationMenuItem>
+                                <NavigationMenuItem><NavigationMenuTrigger>Categories</NavigationMenuTrigger>
+                                <NavigationMenuContent>
+            
+            {/* {components.map((component) => (
+              <ListItem 
+                key={component.title}
+                title={component.title}
+                href={component.href}
+              >
+                {component.description}
+              </ListItem>
+            ))} */}
+            <ComponentList />
+          
+        </NavigationMenuContent>
+                                </NavigationMenuItem>
+                                
+                                <NavigationMenuItem><NavigationMenuLink className={navigationMenuTriggerStyle() + 'focus:bg-white'}>Movies</NavigationMenuLink></NavigationMenuItem>
+                                <NavigationMenuItem><NavigationMenuLink className={navigationMenuTriggerStyle() + 'focus:bg-customColor'}>TV Shows</NavigationMenuLink></NavigationMenuItem>
                             </NavigationMenuItem>
                         </NavigationMenuList>
                     </NavigationMenu>
