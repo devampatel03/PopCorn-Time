@@ -48,7 +48,7 @@
 
 
 import React, { useState, useEffect } from "react";
-import MovieCard from "./m_card";
+import MovieCard from "./components/ui/m_card";
 
 import { Button } from "./components/ui/button";
 import Autoplay from "embla-carousel-autoplay"

@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import MovieCard from "./m_card";
+import MovieCard from "./components/ui/m_card";
 
-import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useLocation,useNavigate } from 'react-router-dom';
+
+
 import { Button } from "./components/ui/button";
 import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent } from "./components/ui/card";
@@ -16,7 +18,7 @@ import LoginPage from "./LoginPage";
 import Upcoming_card from "./components/ui/upcoming_movies";
 import { hover } from "@testing-library/user-event/dist/hover";
 
-const API_URL = 'http://www.omdbapi.com?apikey=bc848061';
+const API_URL = 'http://www.omdbapi.com?apikey=13a38685';
 
 export function CarouselPlugin() {
     const plugin = useRef(
@@ -66,19 +68,20 @@ const App = () => {
     const [listOfMovies, setListOfMovies] = useState([]);
     const [isScrolled, setIsScrolled] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
     const searchMovies = async (title) => {
-        const response = await fetch(`${API_URL}&s=${title}`);
-        const data = await response.json();
-        console.log(data);
-        setListOfMovies(data.Search);
-    };
+      const response = await fetch(`${API_URL}&s=${title}`);
+      const data = await response.json();
+      setListOfMovies(data.Search);
+  };
 
-    const handleKeyDown = (event) => {
-        if (event.key === "Enter") {
-            searchMovies(searchKeyword);
-        }
-    };
+  const handleKeyDown = (event) => {
+      if (event.key === "Enter") {
+          searchMovies(searchKeyword);
+          navigate('/search');
+      }
+  };
 
     useEffect(() => {
         searchMovies('batman');
@@ -180,7 +183,7 @@ const App = () => {
                               <NavigationMenuItem className="flex items-center justify-between">
                                 {/* <NavigationMenuTrigger>Home</NavigationMenuTrigger> */}
                                 <NavigationMenuItem>
-                                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                <NavigationMenuLink className={navigationMenuTriggerStyle()} onClick={() => { navigate('/');}}>
               Home
             </NavigationMenuLink>
 
@@ -218,16 +221,19 @@ const App = () => {
                             value={searchKeyword}
                             onChange={(e) => setSearchKeyword(e.target.value)}
                             onKeyDown={handleKeyDown}
+                            to="/search"
                             className="input bg-transparent pl-6 pr-10 py-5 w-full font-sans text-lg font-semibold"
                         />
                         <div className="absolute right-2 top-[0.4em]">
-                            <button className="w-14 h-14 rounded-full bg-black-500 group shadow-xl flex items-center justify-center relative overflow-hidden">
+                            <button className="w-14 h-14 rounded-full bg-black-500 group shadow-xl flex items-center justify-center relative overflow-hidden" onClick={() => { navigate('/search');searchMovies(searchKeyword);}}>
                                 <div className="w-full h-full -rotate-45 absolute -left-[32%] -top-[32%] group-hover:left-[100%] group-hover:top-[100%] bg-white bg-opacity-50 duration-1000"></div>
                                 <div className="w-full h-full rotate-45 absolute left-[32%] top-[32%] bg-black bg-opacity-20 group-hover:-left-[100%] group-hover:-top-[100%] duration-1000"></div>
-                                <MagnifyingGlassIcon className="w-8 h-8 text-white" onClick={() => searchMovies(searchKeyword)} />
+                                <MagnifyingGlassIcon className="w-8 h-8 text-white"  />
                             </button>
                         </div>
+                        
                     </div>
+                  
                     <div>
                         <Link to="/login">
                             <img src="user2.svg" className="img w-16"></img>
@@ -250,9 +256,16 @@ const App = () => {
                         <div className="carousel ml-12 mt-32">
                             <CarouselPlugin className="ml-64" />
                         </div>
-
+                        
 
                     </div>
+                } />
+                <Route path="/search" element={
+                  <div className="flex flex-wrap justify-center mt-56 bg-customColor2 gap-7">
+                  {sortedMovies.map((movie) => (
+                      <MovieCard key={movie.imdbID} movie={movie} />
+                  ))}
+              </div>
                 } />
             </Routes>
 
