@@ -17,12 +17,13 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, ListIte
 import LoginPage from "./LoginPage";
 import Upcoming_card from "./components/ui/upcoming_movies";
 import { hover } from "@testing-library/user-event/dist/hover";
+import Footer from "./components/ui/footer";
 
 const API_URL = 'http://www.omdbapi.com?apikey=13a38685';
 
 export function CarouselPlugin() {
     const plugin = useRef(
-        Autoplay({ delay: 2000, stopOnInteraction: true })
+        Autoplay({ delay: 2000, stopOnInteraction: true,loop:true, from: 0, to: 1})
     );
 
     const upcomingMovies = [1, 2, 3, 4, 5, 6, 7];
@@ -67,10 +68,10 @@ const App = () => {
     const [searchKeyword, setSearchKeyword] = useState('');
     const [listOfMovies, setListOfMovies] = useState([]);
     const romgenreList = ["tt3783958", "tt5726616", "tt2209418", "tt5580390", "tt1517451", "tt2194499", "tt5462602", "tt2402927", "tt0381681", "tt2582846"];
-    const trendingList= ["tt2194499", "tt10872600", "tt10838180", "tt9376612", "tt9243804", "tt11095836", "tt5783956", "tt3811906", "tt1517451", "tt3501632"];
-    const actionList= ["tt2381249", "tt2802144", "tt2515034", "tt1641841", "tt2199571", "tt2493486", "tt3397884"];
-    const comedyList= ["tt11095836", "tt0448115", "tt5783956", "tt2704998", "tt2283362", "tt3501632", "tt6751668", "tt0118799", "tt6966692", "tt0120382"];
-    const horrorList= ["tt8332922", "tt0081505", "tt0993840", "tt0185937", "tt7784604", "tt1029234", "tt3811906", "tt0167404"];
+    const trendingList = ["tt2194499", "tt10872600", "tt10838180", "tt9376612", "tt9243804", "tt11095836", "tt5783956", "tt3811906", "tt1517451", "tt3501632"];
+    const actionList = ["tt2381249", "tt2802144", "tt2515034", "tt1641841", "tt2199571", "tt2493486", "tt3397884"];
+    const comedyList = ["tt11095836", "tt0448115", "tt5783956", "tt2704998", "tt2283362", "tt3501632", "tt6751668", "tt0118799", "tt6966692", "tt0120382"];
+    const horrorList = ["tt8332922", "tt0081505", "tt0993840", "tt0185937", "tt7784604", "tt1029234", "tt3811906", "tt0167404"];
 
     // const [listOfgenreMovies, setListOfgenreMovies] = useState([]);
 
@@ -174,20 +175,30 @@ const App = () => {
         },
     ];
 
-    const ComponentList = () => {
-        return (
-            <div className="">
 
-                <ul className="grid w-[10px] gap- p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-black ">
-                    {components.map((component, index) => (
-                        <li key={index} className="grid grid-cols-2 p-10 w-full inline-flex h-9 w-max items-center justify-center rounded-md bg-background bg-transparent px-4 py-2 text-xl font-medium transition-colors mb-4 ">
-                            <a href={component.href} className="border-spacing-2 text-customColor   rounded-md hover:bg-slate-800 p-3 ">{component.description}</a>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        );
-    };
+const ComponentList = () => {
+  return (
+    <div>
+      <ul className="grid w-[10px] gap- p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-black ">
+        {components.map((component, index) => (
+          <li
+            key={index}
+            className="grid grid-cols-2 p-10 w-full inline-flex h-9 w-max items-center justify-center rounded-md bg-background bg-transparent px-4 py-2 text-xl font-medium transition-colors mb-4 "
+          >
+            <a
+              className="border-spacing-2 text-customColor rounded-md hover:bg-slate-800 p-3"
+              onClick={() => {
+                navigate(`/${component.description}`);
+              }}
+            >
+              {component.description}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 
 
@@ -279,14 +290,14 @@ const App = () => {
                         </div>
                         {/* trending */}
                         <div className=" overflow-x-hidden">
-                        <p className="text-4xl mt-36 mb-8 font-bold  text-slate-200 ml-8">Trending Right Now !</p>
-                        <div className="overflow-x-auto  overflow-y-hidden flex flex-nowrap  ml-3 mr-3  bg-black gap-7" style={{ scrollbars: 'none' }}>
-                            {trendingList.map((imdbID) => (
-                                <div className="w-64"> {/* Adjust the width as needed */}
-                                    <MovieCard key={imdbID} movie={{ imdbID }} />
-                                </div>
-                            ))}
-                        </div>
+                            <p className="text-4xl mt-36 mb-8 font-bold  text-slate-200 ml-8">Trending Right Now !</p>
+                            <div className="overflow-x-auto  overflow-y-hidden flex flex-nowrap  ml-3 mr-3  bg-black gap-7 " style={{ scrollbars: 'none' }}>
+                                {trendingList.map((imdbID) => (
+                                    <div className="w-64"> {/* Adjust the width as needed */}
+                                        <MovieCard key={imdbID} movie={{ imdbID }} />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                         {/* romance */}
                         <p className="text-4xl mt-36 mb-8 font-bold  text-slate-200 ml-8">Romance movies</p>
@@ -310,7 +321,7 @@ const App = () => {
 
                         {/* comdey */}
                         <p className="text-4xl mt-36 mb-8 font-bold  text-slate-200 ml-8">Comedy movies</p>
-                        <div className="overflow-x-auto overflow-y-hidden flex flex-nowrap  ml-3 mr-3  bg-black gap-7">
+                        <div className="overflow-x-auto overflow-y-hidden flex flex-nowrap  ml-3 mr-3   bg-black gap-7">
                             {comedyList.map((imdbID) => (
                                 <div className="w-64"> {/* Adjust the width as needed */}
                                     <MovieCard key={imdbID} movie={{ imdbID }} />
@@ -319,15 +330,20 @@ const App = () => {
                         </div>
 
 
-                        {/* comdey */}
+                        {/* comedy */}
                         <p className="text-4xl mt-36 mb-8 font-bold  text-slate-200 ml-8">Horror movies</p>
-                        <div className="overflow-x-auto overflow-y-hidden flex flex-nowrap  ml-3 mr-3  bg-black gap-7">
+                        <div className="overflow-x-auto overflow-y-hidden flex flex-nowrap  ml-3 mr-3  bg-black gap-7 ">
                             {horrorList.map((imdbID) => (
                                 <div className="w-64"> {/* Adjust the width as needed */}
                                     <MovieCard key={imdbID} movie={{ imdbID }} />
                                 </div>
                             ))}
                         </div>
+
+                        <div className="  mt-20">
+                            <Footer />
+                        </div>
+
 
                     </div>
                 } />
@@ -338,6 +354,16 @@ const App = () => {
                         ))}
                     </div>
                 } />
+
+                {/* <Route path="/Action%20and%20adventure" element={
+                    <div className="flex flex-wrap justify-center mt-56 bg-black gap-7">
+                        {actionList.map((imdbID) => (
+                                <div className="w-64"> 
+                                    <MovieCard key={imdbID} movie={{ imdbID }} />
+                                </div>
+                            ))}
+                    </div>
+                } /> */}
             </Routes>
 
         </div>

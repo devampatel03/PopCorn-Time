@@ -456,7 +456,7 @@ const Movie_card = ({ movie: { imdbID } }) => {
       </div>
       {isHovered && (
         <div className="info p-4 shadow-md shadow-white rounded-md -mt-96 text-white backdrop-blur-lg backdrop-contrast-100 backdrop-brightness-50    duration-1000">
-          <h3 className="text-xl font-bold mb-2  ml-16">{movieData.Title}</h3>
+          <h3 className="text-xl font-bold mb-2  ml-2">{movieData.Title}</h3>
           <div className="flex items-center mb-4 ">
             <div className="relative w-12 h-12 mr-2 mt-3">
               <div className="absolute inset-0 flex items-center justify-center">
