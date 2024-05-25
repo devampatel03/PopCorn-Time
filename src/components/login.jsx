@@ -2,17 +2,18 @@
 import React from "react";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { BiLogoFacebook } from "react-icons/bi";
+import login_image from "../assests/Mobile login-cuate.svg";
 
 const Login = () => {
   return (
     <section className="h-screen bg-black flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
-      <div className="md:w-1/3 max-w-sm">
+      <div className="md:w-2/3 max-w-lm">
         <img
-          src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-          alt="Sample image"
+          src={login_image}
+         
         />
       </div>
-      <div className="md:w-1/3 max-w-sm">
+      <div className=" max-w-sm w-96">
         <div className="text-center md:text-left">
           <label className="mr-1">Sign in with</label>
           <button

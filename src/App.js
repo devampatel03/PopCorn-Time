@@ -14,10 +14,10 @@ import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
 
 import { NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, ListItem, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationMenuViewport, navigationMenuTriggerStyle } from "./components/ui/navigation-menu"
-import LoginPage from "./LoginPage";
 import Upcoming_card from "./components/ui/upcoming_movies";
 import { hover } from "@testing-library/user-event/dist/hover";
 import Footer from "./components/ui/footer";
+import Login from "./components/login.jsx";
 
 const API_URL = 'http://www.omdbapi.com?apikey=13a38685';
 
@@ -282,7 +282,7 @@ const ComponentList = () => {
         <div>
             {renderHeader()}
             <Routes>
-                <Route path="/login" element={<LoginPage />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/" element={
                     <div className="app bg-cover pt-20 bg-black bg-no-repeat overflow-y-auto overflow-x-hidden">
                         <div className="carousel ml-12 mt-32">

@@ -542,7 +542,7 @@ const Movie_card = ({ movie: { imdbID } }) => {
                     Add to Favorites
                   </span>
                   <span
-                    className={`option-2 -translate-y-5 transition-all duration-1000 ${isFavorite ? "translate-y-0 opacity-1" : "translate-y-full opacity-0"
+                    className={`option-2 -translate-y-6 transition-all duration-1000 ${isFavorite ? "translate-y-0 opacity-1" : "translate-y-full opacity-0"
                       }`}
                   >
                     Added to Favorites
