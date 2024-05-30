@@ -19,7 +19,7 @@ import { hover } from "@testing-library/user-event/dist/hover";
 import Footer from "./components/ui/footer";
 import Login from "./components/login.jsx";
 
-const API_URL = 'http://www.omdbapi.com?apikey=13a38685';
+const API_URL = 'https://www.omdbapi.com?apikey=13a38685';
 
 export function CarouselPlugin() {
     const plugin = useRef(
