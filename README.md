@@ -117,3 +117,7 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 
 - This project was inspired by the love of movies and the desire to create a fun and interactive movie exploration experience.
 - Special thanks to the creators of the OMDb API and the YouTube API for providing access to movie data and trailers.
+
+## License
+
+  This project is licensed under the MIT License. See the LICENSE file for details.
